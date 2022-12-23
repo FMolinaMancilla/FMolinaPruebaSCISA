@@ -1,0 +1,51 @@
+﻿@model ML.Cita
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Citas</h2>
+            <h5>Seleccione una Cita para editarla o "Agregar" para registrar nueva cita.</h5>
+        </div>
+        <div style="float:right">
+            @Html.ActionLink("Agregar", "Form", "Cita", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <br>
+    <br />
+
+    <table class="table table table-striped">
+        <thead>
+            <tr>
+                <td class="text-center">Editar</td>
+                <td class="text-center">Doctor</td>
+                <td class="text-center">Paciente</td>
+                <td class="text-center">Fecha</td>
+                <td class="text-center">Observaciones</td>
+                <td class="text-center">Eliminar</td>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (ML.Cita cita in Model.Citas)
+            {
+                <tr>
+                    <td class="text-center"><a class="glyphicon glyphicon-edit btn btn-warning" href="@Url.Action("Form", "Cita", new { IdCita = cita.IdCita })"></a></td>
+                    <td class="hidden">@cita.IdCita</td>
+                    <td class="hidden">@cita.Doctor.IdDoctor</td>
+                    <td class="hidden">@cita.Paciente.IdPaciente</td>
+                    <td class="text-center">@cita.Doctor.Nombre @cita.Doctor.ApellidoPaterno @cita.Doctor.ApellidoMaterno</td>
+                    <td class="text-center">@cita.Paciente.Nombre @cita.Paciente.ApellidoPaterno @cita.Paciente.ApellidoMaterno</td>
+                    <td class="text-center">@cita.Fecha @cita.Hora</td>
+                    <td class="text-center">@cita.Observaciones</td>
+
+                    <td class="text-center"><a class="glyphicon glyphicon-trash btn btn-danger" href="@Url.Action("Delete", "Cita", new { IdCita = cita.IdCita})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

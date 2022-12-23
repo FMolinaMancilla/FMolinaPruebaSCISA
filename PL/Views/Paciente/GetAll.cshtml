@@ -1,0 +1,62 @@
+﻿@model ML.Paciente
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Paciente</h2>
+            <h5>Seleccione un Paciente para editarlo o "Agregar" para un nuevo registro.</h5>
+        </div>
+        <div style="float:right">
+            @Html.ActionLink("Agregar", "Form", "Paciente", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <br>
+    <br />
+    <div class="row">
+        @foreach (ML.Paciente paciente in Model.Pacientes)
+        {
+
+            <div class="col-lg-2">
+                <div class="card text-white bg-dark border-success  mb-3 border-4 " style="width: 18rem;">
+                    <div class="card" style="width: 18rem;">
+
+                        @if (paciente.Imagen != null)
+                        {
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(paciente.Imagen)" style=" height:130px; width: 130px;" />
+                        }
+                        else
+                        {
+                            <img src="~/Img/SinUser.png" style=" height:100px; width:100px;" />
+                        }
+                        <div class="card-body">
+                            <h3 class="text-center">Paciente</h3>
+                            <h3 class="text-center">
+                                @paciente.Nombre
+                                @paciente.ApellidoPaterno @paciente.ApellidoMaterno
+                            </h3>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-center">Sexo: @paciente.Sexo</li>
+                            <li class="list-group-item text-center">NSS: @paciente.NSS</li>
+                            <li class="list-group-item text-center">Email:  @paciente.Email</li>
+                            <li class="list-group-item text-center">Password: @paciente.Password</li>
+                            <li class="list-group-item text-center">Telefono: @paciente.Telefono</li>
+                            <li class="list-group-item text-center">Direccion: @paciente.Direccion</li>
+                            <li class="list-group-item text-center">Fecha de nacimiento: @paciente.FechaNacimiento</li>
+                            <li class="list-group-item text-center">
+                            <a class="glyphicon glyphicon-edit btn btn-warning" href="@Url.Action("Form", "Paciente", new { IdPaciente = paciente.IdPaciente })"></a>           
+                            <a class="glyphicon glyphicon-trash btn btn-danger" href="@Url.Action("Delete", "Paciente", new { IdPaciente = paciente.IdPaciente})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+
+</div>

@@ -1,0 +1,99 @@
+﻿@model ML.Cita
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Registro</h2>
+        </div>
+    </div>
+    <br />
+
+
+    @using (Html.BeginForm("Form", "Cita", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="row">
+            <div class="hidden">
+                <div class="col-md-4 col-12 col-sm-6">
+                    @Html.LabelFor(model => model.IdCita)
+                    @Html.TextBoxFor(model => model.IdCita, new { @class = "form-control", @id = "txtIdCita" })
+                    @Html.ValidationMessageFor(model => model.IdCita)
+                </div>
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Doctor.IdDoctor)
+                @Html.DropDownListFor(model => model.Doctor.IdDoctor, new SelectList(Model.Doctor.Doctores, "IdDoctor", "NombreCompleto"), "Selecciona una opción", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Doctor.IdDoctor)
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Paciente.IdPaciente)
+                @Html.DropDownListFor(model => model.Paciente.IdPaciente, new SelectList(Model.Paciente.Pacientes, "IdPaciente", "NombreCompleto"), "Selecciona una opción", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Paciente.IdPaciente)
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Fecha)
+                @Html.TextBoxFor(model => model.Fecha, "{0:dd-MM-yyy}",new { @class = "form-control", @id = "txtFechaCita" })
+                @Html.ValidationMessageFor(model => model.Fecha)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Hora)
+                    @Html.TextBoxFor(model => model.Hora, new { @class = "form-control", @id = "txtHora" })
+                    @Html.ValidationMessageFor(model => model.Hora)
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Observaciones)
+                @Html.TextAreaFor(model => model.Observaciones, new { @class = "form-control", @id = "txtObservaciones" })
+                @Html.ValidationMessageFor(model => model.Observaciones)
+            </div>
+            <br>
+            <br />
+            <div class="form-group">
+                <div class="col-md-4">
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                    @Html.ActionLink("Regresar", "GetAll", "Cita", htmlAttributes: new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+
+    <script type="text/javascript">
+
+        $(function () {
+            $("#txtFechaCita").datepicker({
+                dateFormat: 'dd-mm-yy',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+
+        $('#txtHora').timepicker({
+            timeFormat: 'h:mm',
+            interval: 30,
+            maxTime: '6',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+
+    </script>
+}

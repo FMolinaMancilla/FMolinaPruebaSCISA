@@ -1,0 +1,63 @@
+﻿@model ML.Doctor
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Doctores</h2>
+            <h5>Seleccione un Doctor para editarlo o "Agregar" para un nuevo registro.</h5>
+        </div>
+        <div style="float:right">
+            @Html.ActionLink("Agregar", "Form", "Doctor", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <br>
+    <br />
+
+    <table class="table table table-striped">
+        <thead>
+            <tr>
+                <td class="text-center">Editar</td>
+                <td class="text-center">Nombre</td>
+                <td class="text-center">Sexo</td>
+                <td class="text-center">Email</td>
+                <td class="text-center">Telefono</td>
+                <td class="text-center">Especialidad</td>
+                <td class="text-center">Fotografia</td>
+                <td class="text-center">Eliminar</td>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (ML.Doctor doctor in Model.Doctores)
+            {
+                <tr>
+                    <td class="text-center"><a class="glyphicon glyphicon-edit btn btn-warning" href="@Url.Action("Form", "Doctor", new { IdDoctor = doctor.IdDoctor })"></a></td>
+                    <td class="hidden">@doctor.IdDoctor</td>
+                    <td class="text-center">@doctor.Nombre @doctor.ApellidoPaterno @doctor.ApellidoMaterno</td>
+                    <td class="text-center">@doctor.Sexo</td>
+                    <td class="text-center">@doctor.Email</td>
+                    <td class="hidden">@doctor.Password</td>
+                    <td class="text-center">@doctor.Telefono</td>
+                    <td class="hidden">@doctor.Especialidad.IdEspecialidad</td>
+                    <td class="text-center">@doctor.Especialidad.Nombre</td>
+
+                    @if (doctor.Imagen != null)
+                    {
+                        <td class="center-block"><img src="data:image/jpeg;base64,@Convert.ToBase64String(doctor.Imagen)" style=" height:100px; width: 100px;" /></td>
+                    }
+                    else
+                    {
+                        <td><img src="~/Img/SinUser.png" style=" height:100px; width:100px;" /></td>
+                    }
+
+                    <td class="text-center"><a class="glyphicon glyphicon-trash btn btn-danger" href="@Url.Action("Delete", "Doctor", new { IdDoctor = doctor.IdDoctor})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

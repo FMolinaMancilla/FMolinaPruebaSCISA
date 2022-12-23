@@ -1,0 +1,192 @@
+﻿@model ML.Paciente
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Form</h2>
+        </div>
+    </div>
+    <br />
+
+    @using (Html.BeginForm("Form", "Paciente", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="row">
+            <div class="hidden">
+                <div class="col-md-4 col-12 col-sm-6">
+                    @Html.LabelFor(model => model.IdPaciente)
+                    @Html.TextBoxFor(model => model.IdPaciente, new { @class = "form-control", @id = "txtIdPaciente" })
+                    @Html.ValidationMessageFor(model => model.IdPaciente)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Nombre)
+                <div class="form-group has-feedback">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre", @onkeypress = "SoloLetras(event, 'lblNombre')" })
+                    @Html.ValidationMessageFor(model => model.Nombre)
+                    @Html.Label("", null, new { @id = "lblNombre" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.ApellidoPaterno)
+                <div class="form-group has-feedback">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno", @onkeypress = "SoloLetras(event, 'lblApellidoPaterno')" })
+                    @Html.ValidationMessageFor(model => model.ApellidoPaterno)
+                    @Html.Label("", null, new { @id = "lblApellidoPaterno" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.ApellidoMaterno)
+                <div class="form-group has-feedback">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno", @onkeypress = "SoloLetras(event, 'lblApellidoMaterno')" })
+                    @Html.ValidationMessageFor(model => model.ApellidoMaterno)
+                    @Html.Label("", null, new { @id = "lblApellidoMaterno" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Sexo)
+                <div class="input-group mb-3">
+                    <span class="input-group-text"></span>
+                    Femenino: @Html.RadioButton("Sexo", "F")
+                    Masculino: @Html.RadioButton("Sexo", "M")
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.NSS)
+                @Html.TextBoxFor(model => model.NSS, new { @class = "form-control", @id = "txtNSS" })
+                @Html.ValidationMessageFor(model => model.NSS)
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Email)
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "txtEmail" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Password)
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPassword" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Telefono)
+                @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtTelefono" })
+                @Html.ValidationMessageFor(model => model.Telefono)
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Direccion)
+                @Html.TextBoxFor(model => model.Direccion, new { @class = "form-control", @id = "txtDireccion" })
+                @Html.ValidationMessageFor(model => model.Direccion)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.FechaNacimiento)
+                @Html.TextBoxFor(model => model.FechaNacimiento, new { @class = "form-control", @id = "txtFechaNacimiento" })
+                @Html.ValidationMessageFor(model => model.FechaNacimiento)
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Imagen)
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"></span>
+                    <input id="ImagenData" type='file' class="form-control" name="ImagenData" onchange="validateFile(this), readURL(this);  " />
+                </div>
+                @if (Model.Imagen != null)
+                {
+                    <img id="ImgPrevia" src="data:image/*;base64,@Convert.ToBase64String(Model.Imagen)" style="width:150px ; height:150px" />
+
+                }
+                else
+                {
+
+                    <img id="ImgPrevia" src="~/Img/SinUser.png" style="width: 150px; height: 150px " />
+                }
+                @Html.HiddenFor(model => model.Imagen)
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-3">
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                    @Html.ActionLink("Regresar", "GetAll", "Paciente", htmlAttributes: new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+
+        function validateFile() { //Funcion Imagen
+            var allowedExtension = ['png', 'jpg'];
+            var fileExtension = document.getElementById('ImagenData').value.split('.').pop().toLowerCase();
+            var isValidFile = false;
+
+            for (var index in allowedExtension) {
+                if (fileExtension === allowedExtension[index]) {
+                    isValidFile = true;
+                    break;
+                }
+            }
+            if (!isValidFile) {
+                alert('Las extensiones permitidas son : *.' + allowedExtension.join(', *.'));
+                document.getElementById('ImagenData').value = ""
+            }
+            return isValidFile;
+
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#ImgPrevia')
+                        .attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(function () {
+            $("#txtFechaNacimiento").datepicker({
+                dateFormat: 'dd-mm-yy',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+
+        function SoloLetras(e, controlId) {
+            var caracter = e.key;
+            if (!(/^[a-zA-Z\s]*$/.test(caracter))) {
+                e.preventDefault();
+                $('#' + controlId).text("Solo se aceptan letras");
+                $('#' + controlId).css({ "color": "red" });
+                return false;
+            }
+            else {
+                $('#' + controlId).text("");
+                return true;
+            }
+        }
+
+    </script>
+}
