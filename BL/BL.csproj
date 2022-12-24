@@ -66,6 +66,10 @@
       <Project>{4d58b9a5-dec6-42ff-bf60-c2413abef85b}</Project>
       <Name>DL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Encrypt\Encriptacion.csproj">
+      <Project>{6bdb3bbd-81ae-420b-b04b-d2994dd8acda}</Project>
+      <Name>Encriptacion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ML\ML.csproj">
       <Project>{c687e64c-4538-40ac-b226-74b62335a6f0}</Project>
       <Name>ML</Name>

@@ -69,20 +69,22 @@
             </div>
             <div class="col-md-3">
                 @Html.LabelFor(model => model.Email)
-                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "txtEmail" })
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "txtEmail", @onkeypress = "return ValidarEmail(event, 'lblErrorEmail')", @autocomplete = "off" })
                 @Html.ValidationMessageFor(model => model.Email)
+                @Html.Label("", null, new { @id = "lblEmail" })
             </div>
         </div>
         <div class="row">
             <div class="col-md-3">
                 @Html.LabelFor(model => model.Password)
-                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPassword" })
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @id = "txtPassword", type = "password" })
                 @Html.ValidationMessageFor(model => model.Password)
             </div>
             <div class="col-md-3">
                 @Html.LabelFor(model => model.Telefono)
-                @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtTelefono" })
+                @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control", @id = "txtTelefono", @onkeypress = "SoloNumeros(event, 'lblTelefono')" })
                 @Html.ValidationMessageFor(model => model.Telefono)
+                @Html.Label("", null, new { @id = "lblTelefono" })
             </div>
             <div class="col-md-3">
                 @Html.LabelFor(model => model.Direccion)
@@ -186,6 +188,33 @@
                 $('#' + controlId).text("");
                 return true;
             }
+        }
+
+
+        function SoloNumeros(e, controlId) {
+            var caracter = e.key;
+            if (!(/^[0-9]*$/.test(caracter))) {
+                e.preventDefault();
+                $('#' + controlId).text("Solo se aceptan numeros");
+                $('#' + controlId).css({ "color": "red" });
+                return false;
+            }
+            else {
+                $('#' + controlId).text("");
+                return true;
+            }
+        }
+
+
+        function ValidarEmail() {
+            var email = document.getElementById("txtEmail").value;
+            var lblError = docu.getElementById("lblErrorEmail");
+            lblError.innerHTML = "";
+            var expr = /^[-\w.%+]{1,64}@@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/;
+            if (!expr.test(email)) {
+                lblError.innerHTML = "El correo NO es valido";
+            }
+
         }
 
     </script>

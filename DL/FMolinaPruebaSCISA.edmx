@@ -203,80 +203,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FMolinaPruebaSCISAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Doctor">
-          <Key>
-            <PropertyRef Name="IdDoctor" />
-          </Key>
-          <Property Name="IdDoctor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Sexo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdEspecialidad" Type="Int32" Nullable="false" />
-          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Especialidad" Relationship="Self.FK__Doctor__IdEspeci__1273C1CD" FromRole="Doctor" ToRole="Especialidad" />
-          <NavigationProperty Name="Cita" Relationship="FMolinaPruebaSCISAModel.FK__Cita__IdDoctor__2A4B4B5E" FromRole="Doctor" ToRole="Cita" />
-        </EntityType>
-        <EntityType Name="Especialidad">
-          <Key>
-            <PropertyRef Name="IdEspecialidad" />
-          </Key>
-          <Property Name="IdEspecialidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Doctor" Relationship="Self.FK__Doctor__IdEspeci__1273C1CD" FromRole="Especialidad" ToRole="Doctor" />
-        </EntityType>
-        <EntityType Name="Paciente">
-          <Key>
-            <PropertyRef Name="IdPaciente" />
-          </Key>
-          <Property Name="IdPaciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Sexo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NSS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Cita" Relationship="FMolinaPruebaSCISAModel.FK__Cita__IdPaciente__2B3F6F97" FromRole="Paciente" ToRole="Cita" />
-        </EntityType>
-        <Association Name="FK__Doctor__IdEspeci__1273C1CD">
-          <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="1" />
-          <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Especialidad">
-              <PropertyRef Name="IdEspecialidad" />
-            </Principal>
-            <Dependent Role="Doctor">
-              <PropertyRef Name="IdEspecialidad" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="FMolinaPruebaSCISAEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Doctor" EntityType="Self.Doctor" />
-          <EntitySet Name="Especialidad" EntityType="Self.Especialidad" />
-          <EntitySet Name="Paciente" EntityType="Self.Paciente" />
-          <AssociationSet Name="FK__Doctor__IdEspeci__1273C1CD" Association="Self.FK__Doctor__IdEspeci__1273C1CD">
-            <End Role="Especialidad" EntitySet="Especialidad" />
-            <End Role="Doctor" EntitySet="Doctor" />
-          </AssociationSet>
-          <FunctionImport Name="DoctorAdd">
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
-            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
-            <Parameter Name="Sexo" Mode="In" Type="String" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="IdEspecialidad" Mode="In" Type="Int32" />
-            <Parameter Name="Imagen" Mode="In" Type="Binary" />
-          </FunctionImport>
           <FunctionImport Name="DoctorDelete">
           <Parameter Name="IdDoctor" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -284,50 +211,11 @@
           <FunctionImport Name="DoctorGetById" ReturnType="Collection(FMolinaPruebaSCISAModel.DoctorGetById_Result)">
           <Parameter Name="IdDoctor" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="DoctorUpdate">
-            <Parameter Name="IdDoctor" Mode="In" Type="Int32" />
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
-            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
-            <Parameter Name="Sexo" Mode="In" Type="String" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="IdEspecialidad" Mode="In" Type="Int32" />
-            <Parameter Name="Imagen" Mode="In" Type="Binary" />
-          </FunctionImport>
           <FunctionImport Name="PacienteGetAll" ReturnType="Collection(FMolinaPruebaSCISAModel.PacienteGetAll_Result)" />
           <FunctionImport Name="PacienteGetById" ReturnType="Collection(FMolinaPruebaSCISAModel.PacienteGetById_Result)">
           <Parameter Name="IdPaciente" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="PacienteUpdate">
-            <Parameter Name="IdPaciente" Mode="In" Type="Int32" />
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
-            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
-            <Parameter Name="Sexo" Mode="In" Type="String" />
-            <Parameter Name="NSS" Mode="In" Type="String" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
-            <Parameter Name="FechaNacimiento" Mode="In" Type="String" />
-            <Parameter Name="Imagen" Mode="In" Type="Binary" />
-          </FunctionImport>
           <FunctionImport Name="EspecialidadGetAll" ReturnType="Collection(FMolinaPruebaSCISAModel.EspecialidadGetAll_Result)" />
-          <FunctionImport Name="PacienteAdd">
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
-            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
-            <Parameter Name="Sexo" Mode="In" Type="String" />
-            <Parameter Name="NSS" Mode="In" Type="String" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
-            <Parameter Name="FechaNacimiento" Mode="In" Type="String" />
-            <Parameter Name="Imagen" Mode="In" Type="Binary" />
-          </FunctionImport>
           <FunctionImport Name="CitaGetAll" ReturnType="Collection(FMolinaPruebaSCISAModel.CitaGetAll_Result)" />
           <FunctionImport Name="CitaGetById" ReturnType="Collection(FMolinaPruebaSCISAModel.CitaGetById_Result)">
           <Parameter Name="IdCita" Mode="In" Type="Int32" />
@@ -335,15 +223,6 @@
           <FunctionImport Name="GetByEmail" ReturnType="Collection(FMolinaPruebaSCISAModel.GetByEmail_Result)">
           <Parameter Name="Email" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Cita" EntityType="FMolinaPruebaSCISAModel.Cita" />
-          <AssociationSet Name="FK__Cita__IdDoctor__2A4B4B5E" Association="FMolinaPruebaSCISAModel.FK__Cita__IdDoctor__2A4B4B5E">
-            <End Role="Doctor" EntitySet="Doctor" />
-            <End Role="Cita" EntitySet="Cita" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cita__IdPaciente__2B3F6F97" Association="FMolinaPruebaSCISAModel.FK__Cita__IdPaciente__2B3F6F97">
-            <End Role="Paciente" EntitySet="Paciente" />
-            <End Role="Cita" EntitySet="Cita" />
-          </AssociationSet>
           <FunctionImport Name="AgendarCita">
             <Parameter Name="IdDoctor" Mode="In" Type="Int32" />
             <Parameter Name="IdPaciente" Mode="In" Type="Int32" />
@@ -360,12 +239,78 @@
             <Parameter Name="Hora" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="DeleteCita">
-            <Parameter Name="IdCita" Mode="In" Type="Int32" />
+          <Parameter Name="IdCita" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PacienteDelete">
-            <Parameter Name="IdPaciente" Mode="In" Type="Int32" />
+          <Parameter Name="IdPaciente" Mode="In" Type="Int32" />
           </FunctionImport>
-        </EntityContainer>
+          <EntitySet Name="Cita" EntityType="FMolinaPruebaSCISAModel.Cita" />
+          <EntitySet Name="Doctor" EntityType="FMolinaPruebaSCISAModel.Doctor" />
+          <EntitySet Name="Especialidad" EntityType="FMolinaPruebaSCISAModel.Especialidad" />
+          <EntitySet Name="Paciente" EntityType="FMolinaPruebaSCISAModel.Paciente" />
+          <AssociationSet Name="FK__Cita__IdDoctor__2A4B4B5E" Association="FMolinaPruebaSCISAModel.FK__Cita__IdDoctor__2A4B4B5E">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cita__IdPaciente__2B3F6F97" Association="FMolinaPruebaSCISAModel.FK__Cita__IdPaciente__2B3F6F97">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Doctor__IdEspeci__1273C1CD" Association="FMolinaPruebaSCISAModel.FK__Doctor__IdEspeci__1273C1CD">
+            <End Role="Especialidad" EntitySet="Especialidad" />
+            <End Role="Doctor" EntitySet="Doctor" />
+          </AssociationSet>
+          <FunctionImport Name="DoctorAdd">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="IdEspecialidad" Mode="In" Type="Int32" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="DoctorUpdate">
+            <Parameter Name="IdDoctor" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="IdEspecialidad" Mode="In" Type="Int32" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="PacienteAdd">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+            <Parameter Name="NSS" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="PacienteUpdate">
+            <Parameter Name="IdPaciente" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+            <Parameter Name="NSS" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+          </FunctionImport>
+          </EntityContainer>
         <ComplexType Name="DoctorGetAll_Result">
           <Property Type="Int32" Name="IdDoctor" Nullable="false" />
           <Property Type="String" Name="DoctorNombre" Nullable="false" MaxLength="50" />
@@ -469,6 +414,49 @@
           <NavigationProperty Name="Doctor" Relationship="FMolinaPruebaSCISAModel.FK__Cita__IdDoctor__2A4B4B5E" FromRole="Cita" ToRole="Doctor" />
           <NavigationProperty Name="Paciente" Relationship="FMolinaPruebaSCISAModel.FK__Cita__IdPaciente__2B3F6F97" FromRole="Cita" ToRole="Paciente" />
         </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="IdDoctor" />
+          </Key>
+          <Property Name="IdDoctor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdEspecialidad" Type="Int32" Nullable="false" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Cita" Relationship="FMolinaPruebaSCISAModel.FK__Cita__IdDoctor__2A4B4B5E" FromRole="Doctor" ToRole="Cita" />
+          <NavigationProperty Name="Especialidad" Relationship="FMolinaPruebaSCISAModel.FK__Doctor__IdEspeci__1273C1CD" FromRole="Doctor" ToRole="Especialidad" />
+        </EntityType>
+        <EntityType Name="Especialidad">
+          <Key>
+            <PropertyRef Name="IdEspecialidad" />
+          </Key>
+          <Property Name="IdEspecialidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Doctor" Relationship="FMolinaPruebaSCISAModel.FK__Doctor__IdEspeci__1273C1CD" FromRole="Especialidad" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="IdPaciente" />
+          </Key>
+          <Property Name="IdPaciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NSS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Cita" Relationship="FMolinaPruebaSCISAModel.FK__Cita__IdPaciente__2B3F6F97" FromRole="Paciente" ToRole="Cita" />
+        </EntityType>
         <Association Name="FK__Cita__IdDoctor__2A4B4B5E">
           <End Type="FMolinaPruebaSCISAModel.Doctor" Role="Doctor" Multiplicity="1" />
           <End Type="FMolinaPruebaSCISAModel.Cita" Role="Cita" Multiplicity="*" />
@@ -493,55 +481,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK__Doctor__IdEspeci__1273C1CD">
+          <End Type="FMolinaPruebaSCISAModel.Especialidad" Role="Especialidad" Multiplicity="1" />
+          <End Type="FMolinaPruebaSCISAModel.Doctor" Role="Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidad">
+              <PropertyRef Name="IdEspecialidad" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="IdEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FMolinaPruebaSCISAModelStoreContainer" CdmEntityContainer="FMolinaPruebaSCISAEntities">
-          <EntitySetMapping Name="Doctor">
-            <EntityTypeMapping TypeName="FMolinaPruebaSCISAModel.Doctor">
-              <MappingFragment StoreEntitySet="Doctor">
-                <ScalarProperty Name="IdDoctor" ColumnName="IdDoctor" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="IdEspecialidad" ColumnName="IdEspecialidad" />
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Especialidad">
-            <EntityTypeMapping TypeName="FMolinaPruebaSCISAModel.Especialidad">
-              <MappingFragment StoreEntitySet="Especialidad">
-                <ScalarProperty Name="IdEspecialidad" ColumnName="IdEspecialidad" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Paciente">
-            <EntityTypeMapping TypeName="FMolinaPruebaSCISAModel.Paciente">
-              <MappingFragment StoreEntitySet="Paciente">
-                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="NSS" ColumnName="NSS" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="DoctorAdd" FunctionName="FMolinaPruebaSCISAModel.Store.DoctorAdd" />
           <FunctionImportMapping FunctionImportName="DoctorDelete" FunctionName="FMolinaPruebaSCISAModel.Store.DoctorDelete" />
           <FunctionImportMapping FunctionImportName="DoctorGetAll" FunctionName="FMolinaPruebaSCISAModel.Store.DoctorGetAll">
             <ResultMapping>
@@ -577,7 +534,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="DoctorUpdate" FunctionName="FMolinaPruebaSCISAModel.Store.DoctorUpdate" />
           <FunctionImportMapping FunctionImportName="PacienteGetAll" FunctionName="FMolinaPruebaSCISAModel.Store.PacienteGetAll">
             <ResultMapping>
               <ComplexTypeMapping TypeName="FMolinaPruebaSCISAModel.PacienteGetAll_Result">
@@ -614,7 +570,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="PacienteUpdate" FunctionName="FMolinaPruebaSCISAModel.Store.PacienteUpdate" />
           <FunctionImportMapping FunctionImportName="EspecialidadGetAll" FunctionName="FMolinaPruebaSCISAModel.Store.EspecialidadGetAll">
             <ResultMapping>
               <ComplexTypeMapping TypeName="FMolinaPruebaSCISAModel.EspecialidadGetAll_Result">
@@ -623,7 +578,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="PacienteAdd" FunctionName="FMolinaPruebaSCISAModel.Store.PacienteAdd" />
           <FunctionImportMapping FunctionImportName="CitaGetAll" FunctionName="FMolinaPruebaSCISAModel.Store.CitaGetAll">
             <ResultMapping>
               <ComplexTypeMapping TypeName="FMolinaPruebaSCISAModel.CitaGetAll_Result">
@@ -668,6 +622,10 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AgendarCita" FunctionName="FMolinaPruebaSCISAModel.Store.AgendarCita" />
+          <FunctionImportMapping FunctionImportName="UpdateCita" FunctionName="FMolinaPruebaSCISAModel.Store.UpdateCita" />
+          <FunctionImportMapping FunctionImportName="DeleteCita" FunctionName="FMolinaPruebaSCISAModel.Store.DeleteCita" />
+          <FunctionImportMapping FunctionImportName="PacienteDelete" FunctionName="FMolinaPruebaSCISAModel.Store.PacienteDelete" />
           <EntitySetMapping Name="Cita">
             <EntityTypeMapping TypeName="FMolinaPruebaSCISAModel.Cita">
               <MappingFragment StoreEntitySet="Cita">
@@ -680,10 +638,52 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="AgendarCita" FunctionName="FMolinaPruebaSCISAModel.Store.AgendarCita" />
-          <FunctionImportMapping FunctionImportName="UpdateCita" FunctionName="FMolinaPruebaSCISAModel.Store.UpdateCita" />
-          <FunctionImportMapping FunctionImportName="DeleteCita" FunctionName="FMolinaPruebaSCISAModel.Store.DeleteCita" />
-          <FunctionImportMapping FunctionImportName="PacienteDelete" FunctionName="FMolinaPruebaSCISAModel.Store.PacienteDelete" />
+          <EntitySetMapping Name="Doctor">
+            <EntityTypeMapping TypeName="FMolinaPruebaSCISAModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="IdEspecialidad" ColumnName="IdEspecialidad" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdDoctor" ColumnName="IdDoctor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Especialidad">
+            <EntityTypeMapping TypeName="FMolinaPruebaSCISAModel.Especialidad">
+              <MappingFragment StoreEntitySet="Especialidad">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdEspecialidad" ColumnName="IdEspecialidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paciente">
+            <EntityTypeMapping TypeName="FMolinaPruebaSCISAModel.Paciente">
+              <MappingFragment StoreEntitySet="Paciente">
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NSS" ColumnName="NSS" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DoctorAdd" FunctionName="FMolinaPruebaSCISAModel.Store.DoctorAdd" />
+          <FunctionImportMapping FunctionImportName="DoctorUpdate" FunctionName="FMolinaPruebaSCISAModel.Store.DoctorUpdate" />
+          <FunctionImportMapping FunctionImportName="PacienteAdd" FunctionName="FMolinaPruebaSCISAModel.Store.PacienteAdd" />
+          <FunctionImportMapping FunctionImportName="PacienteUpdate" FunctionName="FMolinaPruebaSCISAModel.Store.PacienteUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

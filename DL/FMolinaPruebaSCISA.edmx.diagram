@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="02c2cee66e1f492faa2f34dc600ab43a" Name="Diagram1">
-        <EntityTypeShape EntityType="FMolinaPruebaSCISAModel.Doctor" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMolinaPruebaSCISAModel.Especialidad" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FMolinaPruebaSCISAModel.Paciente" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="FMolinaPruebaSCISAModel.FK__Doctor__IdEspeci__1273C1CD" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="FMolinaPruebaSCISAModel.Cita" Width="1.5" PointX="8" PointY="1.25" />
+        <EntityTypeShape EntityType="FMolinaPruebaSCISAModel.Cita" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="FMolinaPruebaSCISAModel.Doctor" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="FMolinaPruebaSCISAModel.Especialidad" Width="1.5" PointX="0.875" PointY="0.625" />
+        <EntityTypeShape EntityType="FMolinaPruebaSCISAModel.Paciente" Width="1.5" PointX="1" PointY="2.75" />
         <AssociationConnector Association="FMolinaPruebaSCISAModel.FK__Cita__IdDoctor__2A4B4B5E" />
         <AssociationConnector Association="FMolinaPruebaSCISAModel.FK__Cita__IdPaciente__2B3F6F97" />
-        </Diagram>
+        <AssociationConnector Association="FMolinaPruebaSCISAModel.FK__Doctor__IdEspeci__1273C1CD" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

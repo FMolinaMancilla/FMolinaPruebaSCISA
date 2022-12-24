@@ -27,51 +27,10 @@ namespace DL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Cita> Cita { get; set; }
         public virtual DbSet<Doctor> Doctor { get; set; }
         public virtual DbSet<Especialidad> Especialidad { get; set; }
         public virtual DbSet<Paciente> Paciente { get; set; }
-        public virtual DbSet<Cita> Cita { get; set; }
-    
-        public virtual int DoctorAdd(string nombre, string apellidoPaterno, string apellidoMaterno, string sexo, string email, string password, string telefono, Nullable<int> idEspecialidad, byte[] imagen)
-        {
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            var apellidoPaternoParameter = apellidoPaterno != null ?
-                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
-                new ObjectParameter("ApellidoPaterno", typeof(string));
-    
-            var apellidoMaternoParameter = apellidoMaterno != null ?
-                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
-                new ObjectParameter("ApellidoMaterno", typeof(string));
-    
-            var sexoParameter = sexo != null ?
-                new ObjectParameter("Sexo", sexo) :
-                new ObjectParameter("Sexo", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var idEspecialidadParameter = idEspecialidad.HasValue ?
-                new ObjectParameter("IdEspecialidad", idEspecialidad) :
-                new ObjectParameter("IdEspecialidad", typeof(int));
-    
-            var imagenParameter = imagen != null ?
-                new ObjectParameter("Imagen", imagen) :
-                new ObjectParameter("Imagen", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DoctorAdd", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, sexoParameter, emailParameter, passwordParameter, telefonoParameter, idEspecialidadParameter, imagenParameter);
-        }
     
         public virtual int DoctorDelete(Nullable<int> idDoctor)
         {
@@ -96,51 +55,6 @@ namespace DL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DoctorGetById_Result>("DoctorGetById", idDoctorParameter);
         }
     
-        public virtual int DoctorUpdate(Nullable<int> idDoctor, string nombre, string apellidoPaterno, string apellidoMaterno, string sexo, string email, string password, string telefono, Nullable<int> idEspecialidad, byte[] imagen)
-        {
-            var idDoctorParameter = idDoctor.HasValue ?
-                new ObjectParameter("IdDoctor", idDoctor) :
-                new ObjectParameter("IdDoctor", typeof(int));
-    
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            var apellidoPaternoParameter = apellidoPaterno != null ?
-                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
-                new ObjectParameter("ApellidoPaterno", typeof(string));
-    
-            var apellidoMaternoParameter = apellidoMaterno != null ?
-                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
-                new ObjectParameter("ApellidoMaterno", typeof(string));
-    
-            var sexoParameter = sexo != null ?
-                new ObjectParameter("Sexo", sexo) :
-                new ObjectParameter("Sexo", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var idEspecialidadParameter = idEspecialidad.HasValue ?
-                new ObjectParameter("IdEspecialidad", idEspecialidad) :
-                new ObjectParameter("IdEspecialidad", typeof(int));
-    
-            var imagenParameter = imagen != null ?
-                new ObjectParameter("Imagen", imagen) :
-                new ObjectParameter("Imagen", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DoctorUpdate", idDoctorParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, sexoParameter, emailParameter, passwordParameter, telefonoParameter, idEspecialidadParameter, imagenParameter);
-        }
-    
         public virtual ObjectResult<PacienteGetAll_Result> PacienteGetAll()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PacienteGetAll_Result>("PacienteGetAll");
@@ -155,111 +69,9 @@ namespace DL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PacienteGetById_Result>("PacienteGetById", idPacienteParameter);
         }
     
-        public virtual int PacienteUpdate(Nullable<int> idPaciente, string nombre, string apellidoPaterno, string apellidoMaterno, string sexo, string nSS, string email, string password, string telefono, string direccion, string fechaNacimiento, byte[] imagen)
-        {
-            var idPacienteParameter = idPaciente.HasValue ?
-                new ObjectParameter("IdPaciente", idPaciente) :
-                new ObjectParameter("IdPaciente", typeof(int));
-    
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            var apellidoPaternoParameter = apellidoPaterno != null ?
-                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
-                new ObjectParameter("ApellidoPaterno", typeof(string));
-    
-            var apellidoMaternoParameter = apellidoMaterno != null ?
-                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
-                new ObjectParameter("ApellidoMaterno", typeof(string));
-    
-            var sexoParameter = sexo != null ?
-                new ObjectParameter("Sexo", sexo) :
-                new ObjectParameter("Sexo", typeof(string));
-    
-            var nSSParameter = nSS != null ?
-                new ObjectParameter("NSS", nSS) :
-                new ObjectParameter("NSS", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
-            var fechaNacimientoParameter = fechaNacimiento != null ?
-                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
-                new ObjectParameter("FechaNacimiento", typeof(string));
-    
-            var imagenParameter = imagen != null ?
-                new ObjectParameter("Imagen", imagen) :
-                new ObjectParameter("Imagen", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PacienteUpdate", idPacienteParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, sexoParameter, nSSParameter, emailParameter, passwordParameter, telefonoParameter, direccionParameter, fechaNacimientoParameter, imagenParameter);
-        }
-    
         public virtual ObjectResult<EspecialidadGetAll_Result> EspecialidadGetAll()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EspecialidadGetAll_Result>("EspecialidadGetAll");
-        }
-    
-        public virtual int PacienteAdd(string nombre, string apellidoPaterno, string apellidoMaterno, string sexo, string nSS, string email, string password, string telefono, string direccion, string fechaNacimiento, byte[] imagen)
-        {
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("Nombre", nombre) :
-                new ObjectParameter("Nombre", typeof(string));
-    
-            var apellidoPaternoParameter = apellidoPaterno != null ?
-                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
-                new ObjectParameter("ApellidoPaterno", typeof(string));
-    
-            var apellidoMaternoParameter = apellidoMaterno != null ?
-                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
-                new ObjectParameter("ApellidoMaterno", typeof(string));
-    
-            var sexoParameter = sexo != null ?
-                new ObjectParameter("Sexo", sexo) :
-                new ObjectParameter("Sexo", typeof(string));
-    
-            var nSSParameter = nSS != null ?
-                new ObjectParameter("NSS", nSS) :
-                new ObjectParameter("NSS", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
-            var fechaNacimientoParameter = fechaNacimiento != null ?
-                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
-                new ObjectParameter("FechaNacimiento", typeof(string));
-    
-            var imagenParameter = imagen != null ?
-                new ObjectParameter("Imagen", imagen) :
-                new ObjectParameter("Imagen", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PacienteAdd", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, sexoParameter, nSSParameter, emailParameter, passwordParameter, telefonoParameter, direccionParameter, fechaNacimientoParameter, imagenParameter);
         }
     
         public virtual ObjectResult<CitaGetAll_Result> CitaGetAll()
@@ -355,6 +167,194 @@ namespace DL
                 new ObjectParameter("IdPaciente", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PacienteDelete", idPacienteParameter);
+        }
+    
+        public virtual int DoctorAdd(string nombre, string apellidoPaterno, string apellidoMaterno, string sexo, string email, string password, string telefono, Nullable<int> idEspecialidad, byte[] imagen)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var sexoParameter = sexo != null ?
+                new ObjectParameter("Sexo", sexo) :
+                new ObjectParameter("Sexo", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var idEspecialidadParameter = idEspecialidad.HasValue ?
+                new ObjectParameter("IdEspecialidad", idEspecialidad) :
+                new ObjectParameter("IdEspecialidad", typeof(int));
+    
+            var imagenParameter = imagen != null ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DoctorAdd", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, sexoParameter, emailParameter, passwordParameter, telefonoParameter, idEspecialidadParameter, imagenParameter);
+        }
+    
+        public virtual int DoctorUpdate(Nullable<int> idDoctor, string nombre, string apellidoPaterno, string apellidoMaterno, string sexo, string email, string password, string telefono, Nullable<int> idEspecialidad, byte[] imagen)
+        {
+            var idDoctorParameter = idDoctor.HasValue ?
+                new ObjectParameter("IdDoctor", idDoctor) :
+                new ObjectParameter("IdDoctor", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var sexoParameter = sexo != null ?
+                new ObjectParameter("Sexo", sexo) :
+                new ObjectParameter("Sexo", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var idEspecialidadParameter = idEspecialidad.HasValue ?
+                new ObjectParameter("IdEspecialidad", idEspecialidad) :
+                new ObjectParameter("IdEspecialidad", typeof(int));
+    
+            var imagenParameter = imagen != null ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DoctorUpdate", idDoctorParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, sexoParameter, emailParameter, passwordParameter, telefonoParameter, idEspecialidadParameter, imagenParameter);
+        }
+    
+        public virtual int PacienteAdd(string nombre, string apellidoPaterno, string apellidoMaterno, string sexo, string nSS, string email, string password, string telefono, string direccion, string fechaNacimiento, byte[] imagen)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var sexoParameter = sexo != null ?
+                new ObjectParameter("Sexo", sexo) :
+                new ObjectParameter("Sexo", typeof(string));
+    
+            var nSSParameter = nSS != null ?
+                new ObjectParameter("NSS", nSS) :
+                new ObjectParameter("NSS", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var fechaNacimientoParameter = fechaNacimiento != null ?
+                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
+                new ObjectParameter("FechaNacimiento", typeof(string));
+    
+            var imagenParameter = imagen != null ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PacienteAdd", nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, sexoParameter, nSSParameter, emailParameter, passwordParameter, telefonoParameter, direccionParameter, fechaNacimientoParameter, imagenParameter);
+        }
+    
+        public virtual int PacienteUpdate(Nullable<int> idPaciente, string nombre, string apellidoPaterno, string apellidoMaterno, string sexo, string nSS, string email, string password, string telefono, string direccion, string fechaNacimiento, byte[] imagen)
+        {
+            var idPacienteParameter = idPaciente.HasValue ?
+                new ObjectParameter("IdPaciente", idPaciente) :
+                new ObjectParameter("IdPaciente", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var sexoParameter = sexo != null ?
+                new ObjectParameter("Sexo", sexo) :
+                new ObjectParameter("Sexo", typeof(string));
+    
+            var nSSParameter = nSS != null ?
+                new ObjectParameter("NSS", nSS) :
+                new ObjectParameter("NSS", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var fechaNacimientoParameter = fechaNacimiento != null ?
+                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
+                new ObjectParameter("FechaNacimiento", typeof(string));
+    
+            var imagenParameter = imagen != null ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PacienteUpdate", idPacienteParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, sexoParameter, nSSParameter, emailParameter, passwordParameter, telefonoParameter, direccionParameter, fechaNacimientoParameter, imagenParameter);
         }
     }
 }

@@ -31,8 +31,8 @@ namespace DL
         public int IdEspecialidad { get; set; }
         public byte[] Imagen { get; set; }
     
-        public virtual Especialidad Especialidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cita> Cita { get; set; }
+        public virtual Especialidad Especialidad { get; set; }
     }
 }

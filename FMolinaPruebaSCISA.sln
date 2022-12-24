@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ML", "ML\ML.csproj", "{C687
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DL", "DL\DL.csproj", "{4D58B9A5-DEC6-42FF-BF60-C2413ABEF85B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encriptacion", "Encrypt\Encriptacion.csproj", "{6BDB3BBD-81AE-420B-B04B-D2994DD8ACDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4D58B9A5-DEC6-42FF-BF60-C2413ABEF85B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D58B9A5-DEC6-42FF-BF60-C2413ABEF85B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D58B9A5-DEC6-42FF-BF60-C2413ABEF85B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BDB3BBD-81AE-420B-B04B-D2994DD8ACDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BDB3BBD-81AE-420B-B04B-D2994DD8ACDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BDB3BBD-81AE-420B-B04B-D2994DD8ACDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BDB3BBD-81AE-420B-B04B-D2994DD8ACDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

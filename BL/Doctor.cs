@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace BL
             {
                 using (DL.FMolinaPruebaSCISAEntities context = new DL.FMolinaPruebaSCISAEntities())
                 {
-                    var query = context.DoctorAdd(doctor.Nombre, doctor.ApellidoPaterno, doctor.ApellidoMaterno, doctor.Sexo, doctor.Email, doctor.Password, doctor.Telefono, doctor.Especialidad.IdEspecialidad, doctor.Imagen);
+                    var query = context.DoctorAdd(doctor.Nombre, doctor.ApellidoPaterno, doctor.ApellidoMaterno, doctor.Sexo, doctor.Email, Encrypt.Encrypt.GetSHA256(doctor.Password), doctor.Telefono, doctor.Especialidad.IdEspecialidad, doctor.Imagen);
                     if (query > 0)
                     {
                         result.Correct = true;
@@ -42,7 +43,7 @@ namespace BL
             {
                 using (DL.FMolinaPruebaSCISAEntities context = new DL.FMolinaPruebaSCISAEntities())
                 {
-                    var query = context.DoctorUpdate(doctor.IdDoctor, doctor.Nombre, doctor.ApellidoPaterno, doctor.ApellidoMaterno, doctor.Sexo, doctor.Email, doctor.Password, doctor.Telefono, doctor.Especialidad.IdEspecialidad, doctor.Imagen);
+                    var query = context.DoctorUpdate(doctor.IdDoctor, doctor.Nombre, doctor.ApellidoPaterno, doctor.ApellidoMaterno, doctor.Sexo, doctor.Email, Encrypt.Encrypt.GetSHA256(doctor.Password), doctor.Telefono, doctor.Especialidad.IdEspecialidad, doctor.Imagen);
                     if (query > 0)
                     {
                         result.Correct = true;
@@ -82,7 +83,7 @@ namespace BL
                             doctor.ApellidoMaterno = obj.ApellidoMaterno;
                             doctor.Sexo = obj.Sexo;
                             doctor.Email = obj.Email;
-                            doctor.Password = obj.Password;
+                            doctor.Password =obj.Password;
                             doctor.Telefono = obj.Telefono;
 
                             doctor.Especialidad = new ML.Especialidad();
@@ -197,7 +198,7 @@ namespace BL
                         ML.Doctor doctor = new ML.Doctor();
 
                         doctor.Email = query.Email;
-                        doctor.Password = query.Password;
+                        doctor.Password = Encrypt.Encrypt.GetSHA256(query.Password);
 
                         result.Object = doctor;
                         result.Correct = true;

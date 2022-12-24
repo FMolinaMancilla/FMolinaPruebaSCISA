@@ -175,7 +175,7 @@ namespace BL
             {
                 using (DL.FMolinaPruebaSCISAEntities context = new DL.FMolinaPruebaSCISAEntities())
                 {
-                    var query = context.PacienteDelete(cita.IdCita);
+                    var query = context.DeleteCita(cita.IdCita);
                     if (query > 0)
                     {
                         result.Correct = true;

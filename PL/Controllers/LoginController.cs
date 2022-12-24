@@ -22,12 +22,13 @@ namespace PL.Controllers
             ML.Result result = new ML.Result();
 
             result = BL.Doctor.GetByEmail(Email);
+            
 
             if (result.Correct == true)
             {
                 doctor = (ML.Doctor)result.Object;
 
-                if (doctor.Email == Email && doctor.Password == Password)
+                if (doctor.Email == Email && doctor.Password == Encrypt.Encrypt.GetSHA256(Password))
                 {
                     return RedirectToAction("Index", "Home");
                 }

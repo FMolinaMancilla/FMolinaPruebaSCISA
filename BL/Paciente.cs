@@ -15,7 +15,7 @@ namespace BL
             {
                 using (DL.FMolinaPruebaSCISAEntities context = new DL.FMolinaPruebaSCISAEntities())
                 {
-                    var query = context.PacienteAdd(paciente.Nombre, paciente.ApellidoPaterno, paciente.ApellidoMaterno, paciente.Sexo, paciente.NSS, paciente.Email, paciente.Password, paciente.Telefono, paciente.Direccion, paciente.FechaNacimiento, paciente.Imagen);
+                    var query = context.PacienteAdd(paciente.Nombre, paciente.ApellidoPaterno, paciente.ApellidoMaterno, paciente.Sexo, paciente.NSS, paciente.Email, Encrypt.Encrypt.GetSHA256(paciente.Password), paciente.Telefono, paciente.Direccion, paciente.FechaNacimiento, paciente.Imagen);
                     if (query > 0)
                     {
                         result.Correct = true;
@@ -42,7 +42,7 @@ namespace BL
             {
                 using (DL.FMolinaPruebaSCISAEntities context = new DL.FMolinaPruebaSCISAEntities())
                 {
-                    var query = context.PacienteUpdate(paciente.IdPaciente, paciente.Nombre, paciente.ApellidoPaterno, paciente.ApellidoMaterno, paciente.Sexo, paciente.NSS, paciente.Email, paciente.Password, paciente.Telefono, paciente.Direccion, paciente.FechaNacimiento, paciente.Imagen);
+                    var query = context.PacienteUpdate(paciente.IdPaciente, paciente.Nombre, paciente.ApellidoPaterno, paciente.ApellidoMaterno, paciente.Sexo, paciente.NSS, paciente.Email, Encrypt.Encrypt.GetSHA256(paciente.Password), paciente.Telefono, paciente.Direccion, paciente.FechaNacimiento, paciente.Imagen);
                     if (query > 0)
                     {
                         result.Correct = true;
